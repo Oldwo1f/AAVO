@@ -133,7 +133,13 @@
     -o-animation-timing-function: @function;
     animation-timing-function: @function;
 }
-
+.transition-properties(...) {
+@props: ~`"@{arguments}".replace(/[\[\]]/g, '')`;
+-webkit-transition: @props;
+-moz-transition: @props;
+-o-transition: @props;
+transition: @props;
+}
 
 // Background Size
 

@@ -1,8 +1,7 @@
 $(document).ready(function () {
 	console.log('DOM READY');
 
-	// $.backstretch("http://dl.dropbox.com/u/515046/www/garfield-interior.jpg");
-	// })(jQuery);
+		$().prettyEmbed();
 
 	$('.listCatProj li').click(function (e) {
 		$('.listCatProj li').removeClass('active')

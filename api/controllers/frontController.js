@@ -1,6 +1,8 @@
 var Promise = require('bluebird');
 var nodemailer = require('nodemailer');
 var moment = require('moment');
+var marked = require('marked');
+var truncate = require('html-truncate');
 
 module.exports={
 	home:function(req,res,next) {
@@ -75,7 +77,7 @@ module.exports={
 				Project.find({status:'actif'}).populateAll().sort('createdAt DESC').exec(function (err,projects) {
 			
 						return Promise.map(projects,function  (project) {
-							// console.log('---------------------------');
+							console.log('---------------------------');
 							return new Promise(function(resolve,rej){
 								if(project.translations.length && req.locale!= 'fr'){
 									// console.log('we got Trad');
@@ -93,17 +95,20 @@ module.exports={
 								project.content = project.content.substring(0,200) + '...'
 								if(project.images.length)
 								{
+									console.log("IMG.LENGTH");
 									var img0 = _.find(project.images, function(chr) {
 									  return chr.rank == 0;
 									})
 									Image.findOne(img0.image).exec(function (err,datas) {
 										// console.log('datas',datas);
 										project.img = datas
-
+										console.log(project);
 										resolve(project)
 									})
 								}else
 								{
+									console.log("IMG.NOT NOT");
+									console.log(project);
 									resolve(project)
 								}
 							})
@@ -117,21 +122,14 @@ module.exports={
 			},
 			cats:function  (cb) {
 				CategoryProject.find().populateAll().sort('name DESC').exec(function (err,cats) {
-			console.log(err);
-			console.log(cats);
 			 _.remove(cats,function (n) {
 				return n.nbProjects <=0;
 			})
 						return Promise.map(cats,function  (cat) {
-							console.log('---------------------------');
 							return new Promise(function(resolve,rej){
-								console.log(cat.translations.length);
 								if(cat.translations.length && req.locale!= 'fr'){
-									console.log('we got Trad');
 									_.map(cat.translations,function  (trad) {
-										console.log('---------------------------');
 										if(trad.lang == req.locale){
-											console.log('local cool');
 											cat.name = (trad.name) ? trad.name : cat.name;
 											// project.content = (trad.content) ? trad.content : project.content;
 											// project.rewriteurl = (trad.rewriteurl) ? trad.rewriteurl : project.rewriteurl;
@@ -154,10 +152,7 @@ module.exports={
 				})
 			}
 		},function  (err,results) {
-			console.log(err);
-			console.log('results');
-			console.log(results.cats);
-			// console.log(results);
+			// res.send(JSON.stringify(results,null, 10));
 			res.status(200).view('portfolio',{
 				'projects':results.projs,
 				'categories':results.cats,
@@ -165,7 +160,8 @@ module.exports={
 				keyword: req.__('SEO_PORTFO_keyword'),
 				description:req.__('SEO_PORTFO_description'),
 				scripturl:'portfo.js',
-				menu:'portfo'
+				menu:'portfo',
+				marked:marked
 			})
 		})
 		
@@ -288,16 +284,22 @@ module.exports={
 									// console.log(projecttogo.comments);
 									// console.log(projecttogo);
 									console.log('Final Data');
+									var pathtoshare ='';
+									pathtoshare = sails.config.URL_HOME +'article/'+ projecttogo.id +'/';
+									if(projecttogo.urlrewrite)
+									pathtoshare = sails.config.URL_HOME +'article/'+ projecttogo.id +'/'+projecttogo.urlrewrite;
 									// console.log('fetch ONE Project', projecttogo);
 									// res.status(200).send(projecttogo)
 									res.status(200).view('project',{
 										'project':projecttogo,
 										moment: moment,
+										pathtoshare: pathtoshare,
 										'title': projecttogo.title +' - AAVO',
 										keyword: projecttogo.keyword,
 										description:projecttogo.description,
 										scripturl:'project.js',
-										menu:'portfo'
+										menu:'portfo',
+										marked:marked
 									})
 								})
 								
@@ -401,7 +403,7 @@ module.exports={
 										}
 									})
 								}
-								project.content = project.content.substring(0,500) + '...'
+								project.content = truncate(marked(project.content), 450)
 								if(project.images.length)
 								{
 									var img0 = _.find(project.images, function(chr) {
@@ -475,8 +477,9 @@ module.exports={
 				title: req.__('SEO_BLOG_title'),
 				keyword: req.__('SEO_BLOG_keyword'),
 				description:req.__('SEO_BLOG_description'),
-				scripturl:'article.js',
-				menu:'blog'
+				scripturl:'portfo.js',
+				menu:'blog',
+				marked:marked
 			})
 		})
 		
@@ -601,16 +604,26 @@ module.exports={
 									// console.log(projecttogo.comments);
 									// console.log(projecttogo);
 									console.log('Final Data');
+
+									var pathtoshare ='';
+									pathtoshare = sails.config.URL_HOME +'article/'+ projecttogo.id +'/';
+									if(projecttogo.urlrewrite)
+									pathtoshare = sails.config.URL_HOME +'article/'+ projecttogo.id +'/'+projecttogo.urlrewrite;
+
+
+
 									// console.log('fetch ONE Project', projecttogo);
 									// res.status(200).send(projecttogo)
 									res.status(200).view('article',{
 										'article':projecttogo,
 										moment: moment,
+										pathtoshare:pathtoshare,
 										'title': projecttogo.title +' - BLOG - AAVO',
 										keyword: projecttogo.keyword,
 										description:projecttogo.description,
 										scripturl:'article.js',
-										menu:'blog'
+										menu:'blog',
+										marked:marked
 									})
 								})
 								

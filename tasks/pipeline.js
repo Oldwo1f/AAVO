@@ -34,6 +34,8 @@ var jsFilesToInject = [
   // are brought in here
   'bower_components/jquery/dist/jquery.min.js',
   'bower_components/bootstrap/dist/js/bootstrap.min.js',
+  'bower_components/waitingForImages/dist/jquery.waitingforimages.min.js',
+  'bower_components/sharrre/jquery.sharrre.min.js',
   'js/dependencies/**/*.js',
   'js/menu.js',
   

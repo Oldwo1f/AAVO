@@ -77,14 +77,19 @@
                                 <i><%- articles[i].content %></i>
                             </div>
                             <div class="clearfix"></div>
-                            <button class="btn btn-default">Lire la suite</button>
+                            <a class="" href="/article//"></a>
+                            <% if(articles[i].rewriteurl){ %>
+                            <a href="article/<%= articles[i].id %>/<%= articles[i].rewriteurl %>" class="btn btn-default"><%= __('Lire_la_suite') %></a>
+                            <% } else {%>
+                            <a href="article/<%= articles[i].id %>/" class="btn btn-default"><%= __('Lire_la_suite') %></a>
+                            <% } %>
                         </div>
                     </article>
                     <% } %>
                    
                     
                     <ul class="actions" style="margin-top:3.5em">
-                        <li><a href="#" class="button"><%= __('see_blog_button') %></a></li>
+                        <li><a href="/blog" class="button"><%= __('see_blog_button') %></a></li>
                     </ul>
                 </div>
 

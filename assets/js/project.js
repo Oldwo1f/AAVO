@@ -1,5 +1,43 @@
 $(document).ready(function () {
 
+
+
+
+	if(project.publishVideo==true && project.video){ 
+		$().prettyEmbed();
+    }
+
+    
+    $('#twitter').sharrre({
+	  share: {
+	    twitter: true
+	  },
+	  template: '<a class="icon fa-twitter" href="#"><span class="count" href="#">{total}</span></a>',
+	  enableHover: false,
+	  enableTracking: true,
+	  buttons: { twitter: {}},
+	  click: function(api, options){
+	    api.simulateClick();
+	    api.openPopup('twitter');
+	  }
+	});
+    $('#facebook').sharrre({
+	  share: {
+	    facebook: true
+	  },
+	  template: '<a class="icon fa-facebook" href="#"><span class="count" href="#">{total}</span></a>',
+	  enableHover: false,
+	  enableTracking: true,
+	  click: function(api, options){
+	    api.simulateClick();
+	    api.openPopup('facebook');
+	  }
+	});
+
+
+
+
+
 	$('.commentform').submit(function (e) {
 	console.log('commentform');
 		e.preventDefault()

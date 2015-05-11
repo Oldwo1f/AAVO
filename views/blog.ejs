@@ -1,6 +1,6 @@
  <div class="portfo">
             <div id="header">
-                <span class="logo"><img src="images/logo-aavo.jpg"></span>
+                <a href="/"><span class="logo"><img src="/images/logo-aavo.jpg"></span></a>
                 <h1><%= __('Blog') %></h1>
                 
             </div>
@@ -20,17 +20,19 @@
                  <% for(var i=0; i<articles.length; i++) {%>
                    
                             
-                    <div class="box container collapse in" rel="<%= articles[i].category.id %>">
+                    <div class="box container collapse in" rel="<% if(articles[i].category){ %><%= articles[i].category.id %><% } %>">
                         <header>
                             <h2><%= articles[i].title %></h2>
                         </header>
                         <div  class="col col-xs-12 ">
-                                <% if(articles[i].img){ %>
+                                <% if(articles[i].publishVideo==true && articles[i].video){ %>
+                                            <div class="pretty-embed" data-pe-videoid="<%= articles[i].video %>"></div>
+                                <%}else if(articles[i].img) { %>
                                     <img src="/file/image/originalsize/<%= articles[i].img.filename %>" alt="<%= articles[i].img.alt %>"/>
                                 <% } %>
                         </div>
                         <div  class="col col-xs-12 text-center">
-                            <%= articles[i].content %>
+                            <%- articles[i].content %>
                             
                         </div><div  class="col col-xs-12 text-center">
                             <% if(articles[i].rewriteurl){ %>
@@ -70,3 +72,10 @@
                 </div>
             </div>
  </div>
+<script type="text/javascript">
+
+var categories = <%- JSON.stringify(categories) %>;
+        console.log(categories);
+
+
+</script>
