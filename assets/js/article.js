@@ -42,6 +42,7 @@ $(document).ready(function () {
 		var item = $this.attr('item')
 		var rep = $this.attr('reponse')
 		var itemid = $this.attr('itemid')
+		var projid = $this.attr('projid')
 		var name = $this.find('input[name="name"]').val()
 		var email = $this.find('input[name="email"]').val()
 		var message = $this.find('textarea[name="message"]').val()
@@ -101,7 +102,7 @@ $(document).ready(function () {
 
 				$.ajax(
 			    {
-			        url : '/article/addReponse/'+itemid,
+			        url : '/article/addReponse/'+itemid+'/'+projid,
 			        type: "POST",
 			        data : postData,
 			        success:function(data, textStatus, jqXHR) 

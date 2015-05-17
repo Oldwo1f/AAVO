@@ -17,6 +17,7 @@
 var cssFilesToInject = [
   '/bower_components/bootstrap/dist/css/bootstrap.min.css',
   '/bower_components/font-awesome/css/font-awesome.min.css',
+  '/bower_components/animate.css/animate.min.css',
   'css/menu.css',
   'css/skel.css',
   'css/style.css',
@@ -34,6 +35,7 @@ var jsFilesToInject = [
   // are brought in here
   'bower_components/jquery/dist/jquery.min.js',
   'bower_components/bootstrap/dist/js/bootstrap.min.js',
+  'bower_components/wow/dist/wow.min.js',
   'bower_components/waitingForImages/dist/jquery.waitingforimages.min.js',
   'bower_components/sharrre/jquery.sharrre.min.js',
   'js/dependencies/**/*.js',

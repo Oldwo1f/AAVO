@@ -336,7 +336,7 @@ module.exports={
 				Notification.create({type:'projectcomment',status:'todo',info1:article.title,info2:'par '+coment.author,item:'project',itemid:req.params.itemid}).exec(function (err,notif){
 						console.log(err)
 						console.log(notif)
-						 // Notification.publishCreate(notif);
+						 Notification.publishCreate(notif);
 			    		// res.status(200).send(created);
 			    	res.status(200).send(coment)
 				});
@@ -351,30 +351,37 @@ module.exports={
 
 		console.log('addCommentProj');
 		console.log(req.params.itemid);
+		console.log(req.params.projid);
+		
+		
+		console.log('projid',req.params.projid);
 		
 
-		Comment.findOne(req.params.itemid).exec(function (err,article) {
-			console.log(article);
-			Reponse.create({author:req.body.name,
-	  		email:req.body.email,
-	  		content:req.body.message,
-	  		status:'new',
-	  		comment:req.params.itemid
-	  		}).exec(function (err,coment){
-									console.log(err)
-				if(err)
-					res.status(400).send(err)
-				else{
+		Project.findOne(req.params.projid).exec(function (err,article) {
+			Comment.findOne(req.params.itemid).exec(function (err,comment) {
 
-				Notification.create({type:'projectcomment',status:'todo',info1:article.title,info2:'par '+coment.author,item:'project',itemid:req.params.itemid}).exec(function (err,notif){
-						console.log(err)
-						console.log(notif)
-						 // Notification.publishCreate(notif);
-			    		// res.status(200).send(created);
-			    	res.status(200).send(coment)
+				console.log(comment);
+				Reponse.create({author:req.body.name,
+		  		email:req.body.email,
+		  		content:req.body.message,
+		  		status:'new',
+		  		comment:req.params.itemid
+		  		}).exec(function (err,coment){
+										console.log(err)
+					if(err)
+						res.status(400).send(err)
+					else{
+
+					Notification.create({type:'projectcomment',status:'todo',info1:article.title,info2:'par '+coment.author,item:'project',itemid:req.params.projid}).exec(function (err,notif){
+							console.log(err)
+							console.log(notif)
+							 Notification.publishCreate(notif);
+				    		// res.status(200).send(created);
+				    	res.status(200).send(coment)
+					});
+					}
 				});
-				}
-			});
+			})
 		})
 		
 		
@@ -660,7 +667,7 @@ module.exports={
 				Notification.create({type:'articlecomment',status:'todo',info1:article.title,info2:'par '+coment.author,item:'article',itemid:req.params.itemid}).exec(function (err,notif){
 						console.log(err)
 						console.log(notif)
-						 // Notification.publishCreate(notif);
+						 Notification.publishCreate(notif);
 			    		// res.status(200).send(created);
 			    	res.status(200).send(coment)
 				});
@@ -675,30 +682,33 @@ module.exports={
 
 		console.log('addCommentProj');
 		console.log(req.params.itemid);
+		console.log('projid',req.params.projid);
 		
 
-		Comment.findOne(req.params.itemid).exec(function (err,article) {
-			console.log(article);
-			Reponse.create({author:req.body.name,
-	  		email:req.body.email,
-	  		content:req.body.message,
-	  		status:'new',
-	  		comment:req.params.itemid
-	  		}).exec(function (err,coment){
-									console.log(err)
-				if(err)
-					res.status(400).send(err)
-				else{
+		Article.findOne(req.params.projid).exec(function (err,article) {
+			Comment.findOne(req.params.itemid).exec(function (err,comment) {
+				console.log(comment);
+				Reponse.create({author:req.body.name,
+		  		email:req.body.email,
+		  		content:req.body.message,
+		  		status:'new',
+		  		comment:req.params.itemid
+		  		}).exec(function (err,coment){
+										console.log(err)
+					if(err)
+						res.status(400).send(err)
+					else{
 
-				Notification.create({type:'articlecomment',status:'todo',info1:article.title,info2:'par '+coment.author,item:'article',itemid:req.params.itemid}).exec(function (err,notif){
-						console.log(err)
-						console.log(notif)
-						 // Notification.publishCreate(notif);
-			    		// res.status(200).send(created);
-			    	res.status(200).send(coment)
+					Notification.create({type:'articlecomment',status:'todo',info1:article.title,info2:'par '+coment.author,item:'article',itemid:req.params.projid}).exec(function (err,notif){
+							console.log(err)
+							console.log(notif)
+							 Notification.publishCreate(notif);
+				    		// res.status(200).send(created);
+				    	res.status(200).send(coment)
+					});
+					}
 				});
-				}
-			});
+			})
 		})
 		
 		

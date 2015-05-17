@@ -1,11 +1,11 @@
  <div class="portfo">
             <div id="header">
                 <a href="/"><span class="logo"><img src="/images/logo-aavo.jpg"></span></a>
-                <h1><%= __('Blog') %></h1>
+                <h1 class="wow flipInX" ><%= __('Blog') %></h1>
                 
             </div>
             <header class="listCatProj major container 75%">
-                 <h2><%= article.title %></h2>
+                 <h2 class="wow flipInX" ><%= article.title %></h2>
             </header>
             <div id="main">
 
@@ -18,7 +18,7 @@
                     </div>
                     <%}%>
 
-                    <% if(article.publishVideo==true && article.video){ %>
+                    <% if(article.publishVideo==true && typeof article.video !== 'undefined'){ %>
                  	<div class="box boximages container">
                         <div  class="col col-xs-12 ">
                         	<div class="pretty-embed" data-pe-videoid="<%= article.video %>"></div>
@@ -34,9 +34,9 @@
                                 <%- marked(article.content) %>
                         	</div>
                                 <div class="author text-right">
-                                	<% if(article.author.usename){ %>
+                                	<% if(typeof article.author !=='undefined' && article.author.usename){ %>
 	                                <%= article.author.name %>
-	                                <%}else{%>
+	                                <%}else if(typeof article.author !=='undefined' && article.author.pseudo){%>
 	                                <%= article.author.pseudo %>
 	                                <%}%>
                                 </div>
@@ -51,7 +51,7 @@
 
                     <% 
                     var i=1;
-                    if(article.publishVideo==true && article.video){
+                    if(article.publishVideo==true && typeof article.video !== 'undefined'){
                     	i=0;
                     }
                     for(i; i<article.images.length; i++) {%>
@@ -59,8 +59,8 @@
                             
                     <div class="box boximages container">
                        
-                        <div  class="col col-xs-12 ">
-                            <img src="/file/image/originalsize/<%= article.images[i].image.filename %>" alt="<%= article.images[i].image.alt %>"/>
+                        <div  class="col col-xs-12">
+                            <img class="wow fadeIn" src="/file/image/originalsize/<%= article.images[i].image.filename %>" alt="<%= article.images[i].image.alt %>"/>
                         </div>
                     </div>
                     <% } %>  
@@ -68,8 +68,8 @@
                     <div id="socialscontainer" class="">
 	                    <div id="socials" class="">
 
-	                    	<div id="twitter" data-url="<%= pathtoshare %>" data-text="<%= article.title %>"></div> 
-	                    	<div id="facebook" data-url="<%= pathtoshare %>" data-text="<%= article.title %>"></div>  
+	                    	<div id="twitter" class="wow fadeInLeftBig" data-url="<%= pathtoshare %>" data-text="<%= article.title %>"></div> 
+	                    	<div id="facebook" class="wow fadeInRightBig" data-url="<%= pathtoshare %>" data-text="<%= article.title %>"></div>  
 	                    </div>       
                     </div>       
                     <% if(article.activeComent == true) {%>
@@ -122,7 +122,7 @@
 	                        </div>
 	                        <ul>
                 				<% for(var j=0; j<article.comments.length; j++) {%>
-	                        	<li class="box boxcomment">
+	                        	<li class="box boxcomment wow fadeInLeft">
 	                        		<div class="author"><strong><%= article.comments[j].author %></strong></div>
 	                        		<div class="date pull-right small"><%= moment(new Date(article.comments[j].createdAt)).fromNow() %></div>
 	                        		<p><%= article.comments[j].content %></p>
@@ -139,7 +139,7 @@
 			                        </ul>
 			                        <div class="<%= article.comments[j].id %> reply"  title="<%= __('reply') %>"> <i class="fa fa-reply" data-toggle="collapse" aria-expanded="false" data-parent=".comments" data-target=".<%= article.comments[j].id %>"></i></div>
 			                        <div id="" class="box boxcomment collapse addCommentForm <%= article.comments[j].id %>">
-			                        <form method="post" class="commentform" item="comment" itemid="<%= article.comments[j].id %>">
+			                        <form method="post" class="commentform" item="comment" projid="<%= article.id %>" itemid="<%= article.comments[j].id %>">
 				                        <div class="row">
 				                            <div class="6u 12u(mobilep)">
 				                                <input type="text" name="name" placeholder="<%= __('comment_form_name') %>" />

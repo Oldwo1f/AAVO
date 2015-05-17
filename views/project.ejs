@@ -1,11 +1,11 @@
  <div class="portfo">
             <div id="header">
                 <a href="/"><span class="logo"><img src="/images/logo-aavo.jpg"></span></a>
-                <h1><%= __('Portfolio') %></h1>
+                <h1 class="wow flipInX"><%= __('Portfolio') %></h1>
                 
             </div>
             <header class="listCatProj major container 75%">
-                 <h2><%= project.title %></h2>
+                 <h2 class="wow flipInX"><%= project.title %></h2>
             </header>
             <div id="main">
 
@@ -36,18 +36,18 @@
                     <% for(var i=0; i<project.images.length; i++) {%>
                    
                             
-                    <div class="box boximages container">
+                    <div class="box boximages container ">
                        
                         <div  class="col col-xs-12 ">
-                            <img src="/file/image/originalsize/<%= project.images[i].image.filename %>" alt="<%= project.images[i].image.alt %>"/>
+                            <img class="wow fadeIn" src="/file/image/originalsize/<%= project.images[i].image.filename %>" alt="<%= project.images[i].image.alt %>"/>
                         </div>
                     </div>
                     <% } %>  
                     <div id="socialscontainer" class="">
 	                    <div id="socials" class="">
 
-	                    	<div id="twitter" data-url="<%= pathtoshare %>" data-text="<%= project.title %>"></div> 
-	                    	<div id="facebook" data-url="<%= pathtoshare %>" data-text="<%= project.title %>"></div>  
+	                    	<div id="twitter" class="wow fadeInLeftBig" data-wow-duration="1s" data-url="<%= pathtoshare %>" data-text="<%= project.title %>"></div> 
+	                    	<div id="facebook" class="wow fadeInRightBig" data-wow-duration="1s"  data-url="<%= pathtoshare %>" data-text="<%= project.title %>"></div>  
 	                    </div>       
                     </div>      
                     <% if(project.activeComent == true) {%>
@@ -100,7 +100,7 @@
 	                        </div>
 	                        <ul>
                 				<% for(var j=0; j<project.comments.length; j++) {%>
-	                        	<li class="box boxcomment">
+	                        	<li class="box boxcomment wow fadeInLeft">
 	                        		<div class="author"><strong><%= project.comments[j].author %></strong></div>
 	                        		<div class="date pull-right small"><%= moment(new Date(project.comments[j].createdAt)).fromNow() %></div>
 	                        		<p><%= project.comments[j].content %></p>
@@ -117,7 +117,7 @@
 			                        </ul>
 			                        <div class="<%= project.comments[j].id %> reply"  title="<%= __('reply') %>"> <i class="fa fa-reply" data-toggle="collapse" aria-expanded="false" data-parent=".comments" data-target=".<%= project.comments[j].id %>"></i></div>
 			                        <div id="" class="box boxcomment collapse addCommentForm <%= project.comments[j].id %>">
-			                        <form method="post" class="commentform" item="comment" itemid="<%= project.comments[j].id %>">
+			                        <form method="post" class="commentform" item="comment" projid="<%= project.id %>" itemid="<%= project.comments[j].id %>">
 				                        <div class="row">
 				                            <div class="6u 12u(mobilep)">
 				                                <input type="text" name="name" placeholder="<%= __('comment_form_name') %>" />
