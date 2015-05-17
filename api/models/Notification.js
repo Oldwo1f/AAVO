@@ -20,13 +20,13 @@ module.exports = {
   },
   afterUpdate: function(post, cb){
 
-    Notification.publishUpdate(post.id, {});
+    // Notification.publishUpdate(post.id, {});
     cb();
 
   },
   afterCreate: function(post, cb){
 
-    Notification.publishCreate(post);
+    // Notification.publishCreate(post);
     cb();
 
   }

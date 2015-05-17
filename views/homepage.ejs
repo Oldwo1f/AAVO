@@ -1,14 +1,14 @@
 <div id="header">
                 <span class="logo"><img src="images/logo-aavo.jpg"></span>
-                <h1><%= __('Bienvenue') %></h1>
-                <p><%= __('text_accueil_l1') %></p>
-                <p><%= __('text_accueil_l2') %></p>
+                <h1 class="wow flipInX" ><%= __('Bienvenue') %></h1>
+                <p class="wow fadeInRight" data-wow-delay="0.5s"><%= __('text_accueil_l1') %></p>
+                <p class="wow fadeInLeft" data-wow-delay="1s" ><%= __('text_accueil_l2') %></p>
             </div>
 
             <div id="main">
 
                 <header class="major container 75%">
-                    <h2><%= __('skills_l1') %>
+                    <h2 class="wow flipInX"><%= __('skills_l1') %>
                     <br />
                     <%= __('skills_l2') %>
                     <br />
@@ -22,24 +22,24 @@
                 <div class="box alt container">
                     <section class="feature left">
                         <!-- <a href="#" class="image icon fa-signal"><img  src="images/pic01.jpg" alt="" /></a> -->
-                        <div class="img img1"></div>
-                        <div class="content">
-                            <h3><%= __('skill_1_title') %></h3>
-                            <p><%= __('skill_1_content') %></p>
+                        <div class="img img1  wow fadeInLeft"></div>
+                        <div class="content ">
+                            <h3 class="wow fadeInRight"><%= __('skill_1_title') %></h3>
+                            <p class="wow fadeInRight" data-wow-delay="0.5s"><%= __('skill_1_content') %></p>
                         </div>
                     </section>
                     <section class="feature right">
                         <!-- <a href="#" class="image icon fa-code"><img src="images/pic02.jpg" alt="" /></a> -->
-                        <div class="img img2"></div>
-                        <div class="content">
+                        <div class="img img2  wow fadeInRight"></div>
+                        <div class="content  wow fadeInLeft">
                             <h3><%= __('skill_2_title') %></h3>
                             <p><%= __('skill_2_content') %></p>
                         </div>
                     </section>
                     <section class="feature left">
                         <!-- <a href="#" class="image icon fa-mobile"><img src="images/pic03.jpg" alt="" /></a> -->
-                        <div class="img img3"></div>
-                        <div class="content">
+                        <div class="img img3 wow fadeInLeft"></div>
+                        <div class="content  wow fadeInRight">
                             <h3><%= __('skill_3_title') %></h3>
                             <p><%= __('skill_3_content') %></p>
                         </div>
@@ -51,19 +51,19 @@
                 
 
                 <footer class="major container 75%">
-                    <h3><%= __('see_projects_title') %></h3>
-                    <p><%= __('see_projects_content_l1') %> </br> <%= __('see_projects_content_l2') %></p>
-                    <ul class="actions">
+                    <h3 class="wow flipInX"><%= __('see_projects_title') %></h3>
+                    <p class="wow fadeInRight"><%= __('see_projects_content_l1') %> </br> <%= __('see_projects_content_l2') %></p>
+                    <ul class="actionss wow fadeInRight">
                         <li><a href="/portfolio" class="button"><%= __('see_projects_button') %></a></li>
                     </ul>
                 </footer>
 
                 <div class="box container">
                     <header>
-                        <h2><%= __('news_last') %></h2>
+                        <h2 class="wow flipInX"><%= __('news_last') %></h2>
                     </header>
                     <% for(var i=0; i<articles.length; i++) {%>
-                    <article>
+                    <article class="wow fadeInRight">
                         <header>
                             <h3><%= articles[i].title %></h3>
                         </header>
@@ -77,18 +77,18 @@
                                 <i><%- articles[i].content %></i>
                             </div>
                             <div class="clearfix"></div>
-                            <a class="" href="/article//"></a>
+                            
                             <% if(articles[i].rewriteurl){ %>
-                            <a href="article/<%= articles[i].id %>/<%= articles[i].rewriteurl %>" class="btn btn-default"><%= __('Lire_la_suite') %></a>
+                            <a href="article/<%= articles[i].id %>/<%= articles[i].rewriteurl %>" class="btn btn-default wow fadeInRight" data-wow-delay="1s"><%= __('Lire_la_suite') %></a>
                             <% } else {%>
-                            <a href="article/<%= articles[i].id %>/" class="btn btn-default"><%= __('Lire_la_suite') %></a>
+                            <a href="article/<%= articles[i].id %>/" class="btn btn-default wow fadeInRight" data-wow-delay="1s"><%= __('Lire_la_suite') %></a>
                             <% } %>
                         </div>
                     </article>
                     <% } %>
                    
                     
-                    <ul class="actions" style="margin-top:3.5em">
+                    <ul class="actions  wow fadeInRight" style="margin-top:3.5em">
                         <li><a href="/blog" class="button"><%= __('see_blog_button') %></a></li>
                     </ul>
                 </div>
@@ -100,37 +100,37 @@
                 <div class="container 75%">
 
                     <header class="major last">
-                        <h2><%= __('contact_title') %></h2>
+                        <h2 class="wow flipInX"><%= __('contact_title') %></h2>
                     </header>
 
-                    <p><%= __('contact_text') %></p>
+                    <p class="wow fadeInRight"><%= __('contact_text') %></p>
 
                     <form method="post" action="#">
                         <div class="row">
                             <div class="6u 12u(mobilep)">
-                                <input type="text" name="name" placeholder="<%= __('contact_name') %>" />
+                                <input class="wow fadeInRight"data-wow-delay="0.2s" type="text" name="name" placeholder="<%= __('contact_name') %>" />
                             </div>
                             <div class="6u 12u(mobilep)">
-                                <input type="email" name="email" placeholder="<%= __('contact_email') %>" />
+                                <input class="wow fadeInRight"data-wow-delay="0.4s" type="email" name="email" placeholder="<%= __('contact_email') %>" />
                             </div>
                         </div>
                         <div class="row">
                             <div class="12u">
-                                <textarea name="message" placeholder="<%= __('contact_message') %>" rows="6"></textarea>
+                                <textarea class="wow fadeInRight"data-wow-delay="0.6s" name="message" placeholder="<%= __('contact_message') %>" rows="6"></textarea>
                             </div>
                         </div>
                         <div class="row">
                             <div class="12u">
                                 <ul class="actions">
-                                    <li><input type="submit" value="<%= __('contact_send') %>" /></li>
+                                    <li><input class="wow fadeInRight"data-wow-delay="0.8s" type="submit" value="<%= __('contact_send') %>" /></li>
                                 </ul>
                             </div>
                         </div>
                     </form>
 
                     <ul class="icons">
-                        <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-                        <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+                        <li><a href="#" class="icon fa-twitter "><span class="label">Twitter</span></a></li>
+                        <li><a href="#" class="icon fa-facebook "><span class="label">Facebook</span></a></li>
                         <!-- <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
                         <li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
                         <li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li> -->
