@@ -168,44 +168,7 @@ module.exports = {
 
 		console.log("testMAIl");
 		  			// var transporter = nodemailer.createTransport(directTransport());
-						var transporter = nodemailer.createTransport({
-						    service: 'Gmail',
-						    auth: {
-						        user: 'alexismomcilovic@gmail.com',
-						        pass: 'Alexis09'
-						    }
-						})
-					// NB! No need to recreate the transporter object. You can use
-					// the same transporter object for all e-mails
-					salt = 'toto'
-					// // setup e-mail data with unicode symbols
-					// var mailOptions = {
-					//     from: ' <toto@toto.fr>', // sender address
-					//     to: 'alexismomcilovic@gmail.com', // list of receivers
-					//     subject: 'Votre mot de passe est arrivé', // Subject line
-					//     text: 'Voici'// html body
-					// };
-					var mailOptions = {
-					    from: sails.config.COMPANY_NAME+' <'+sails.config.MAIN_EMAIL+'>', // sender address
-					    to: 'alexismomcilovic@outlook.com', // list of receivers
-					    subject: 'Votre mot de passe est arrivé', // Subject line
-					    text: 'Voici le mot de passe qui vous servira pour vos premières connexions. Pensez à le changer rapidement \n \nMot de passe: '+ salt+'\n \nCordialement, l\'équipe '+sails.config.COMPANY_NAME+' \n'// html body
-					};
-					console.log(salt);
-					// send mail with defined transport object
-					transporter.sendMail(mailOptions, function(error, info){
-
-						console.log('here');
-						console.log(error);
-						console.log(info);
-					    if(error){
-					        res.status(200).send('mail error');
-					    }else{
-
-							res.status(200).send('mail sended');
-
-					    }
-					});
+					
 	},
 	fetchMe:function(req,res) {
 		console.log('fetchMe');

@@ -32,7 +32,7 @@ module.exports={
 								}
 							})
 						}
-						article.content = article.content.substring(0,200) + '...'
+						article.content = truncate(marked(article.content), 450)
 						if(article.images.length)
 						{
 							var img0 = _.find(article.images, function(chr) {
@@ -54,6 +54,7 @@ module.exports={
 					console.log(articless);
 					res.status(200).view('homepage',{
 						articles:articles,
+						marked:marked,
 						title: req.__('SEO_HOME_title'),
 						keyword: req.__('SEO_HOME_keyword'),
 						description:req.__('SEO_HOME_description'),
@@ -92,7 +93,7 @@ module.exports={
 										}
 									})
 								}
-								project.content = project.content.substring(0,200) + '...'
+								project.content = truncate(marked(project.content), 450)
 								if(project.images.length)
 								{
 									console.log("IMG.LENGTH");
@@ -714,11 +715,46 @@ module.exports={
 		
 
 	},
-	test:function(req,res,next) {
+	contactEmail:function(req,res,next) {
 
-		console.log('test');
-// User.subscribe( req.socket,[],['create'] );
-		res.render('test')
+		console.log('contactEmailcontactEmailcontactEmailcontactEmailcontactEmailcontactEmail');
+		console.log(req.body.message);
+		console.log(req.body.name);
+		console.log(req.body.email);
+		if(req.body.message && req.body.name && req.body.email)
+		{
+			console.log('contactEmail ----> true');
+			var transporter = nodemailer.createTransport({
+				    service: 'Gmail',
+				    auth: {
+				        user: sails.config.MAIN_EMAIL_GOOGLE,
+						pass: sails.config.MAIN_EMAIL_GOOGLE_PWD
+				    }
+				})
+			
+			var mailOptions = {
+			    from: req.body.name+' <'+req.body.email+'>', // sender address
+			    to: sails.config.MAIN_EMAIL, // list of receivers
+			    subject: 'Site - '+ sails.config.COMPANY_NAME +' - contact : '+ req.body.name, // Subject line
+			    text: req.body.message // html body
+			};
+			// send mail with defined transport object
+			transporter.sendMail(mailOptions, function(error, info){
+
+				console.log('here');
+				console.log(error);
+				console.log(info);
+			    if(error){
+			        res.status(400).send('mail error');
+			    }else{
+
+					res.status(200).send('mail sended');
+
+			    }
+			});
+		}else{
+			res.status(400).send('field error');
+		}
 	}
 	
 }

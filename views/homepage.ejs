@@ -24,15 +24,15 @@
                         <!-- <a href="#" class="image icon fa-signal"><img  src="images/pic01.jpg" alt="" /></a> -->
                         <div class="img img1  wow fadeInLeft"></div>
                         <div class="content ">
-                            <h3 class="wow fadeInRight"><%= __('skill_1_title') %></h3>
-                            <p class="wow fadeInRight" data-wow-delay="0.5s"><%= __('skill_1_content') %></p>
+                            <h3 class="wow flipInX"><%= __('skill_1_title') %></h3>
+                            <p ><%= __('skill_1_content') %></p>
                         </div>
                     </section>
                     <section class="feature right">
                         <!-- <a href="#" class="image icon fa-code"><img src="images/pic02.jpg" alt="" /></a> -->
                         <div class="img img2  wow fadeInRight"></div>
                         <div class="content  wow fadeInLeft">
-                            <h3><%= __('skill_2_title') %></h3>
+                            <h3 class="wow flipInX"><%= __('skill_2_title') %></h3>
                             <p><%= __('skill_2_content') %></p>
                         </div>
                     </section>
@@ -40,7 +40,7 @@
                         <!-- <a href="#" class="image icon fa-mobile"><img src="images/pic03.jpg" alt="" /></a> -->
                         <div class="img img3 wow fadeInLeft"></div>
                         <div class="content  wow fadeInRight">
-                            <h3><%= __('skill_3_title') %></h3>
+                            <h3 class="wow flipInX"><%= __('skill_3_title') %></h3>
                             <p><%= __('skill_3_content') %></p>
                         </div>
                     </section>
@@ -74,7 +74,7 @@
                             </div>
                             <% } %>
                             <div  class="col col-xs-12 col-sm-8">
-                                <i><%- articles[i].content %></i>
+                                <i><%- marked(articles[i].content) %></i>
                             </div>
                             <div class="clearfix"></div>
                             
@@ -104,8 +104,8 @@
                     </header>
 
                     <p class="wow fadeInRight"><%= __('contact_text') %></p>
-
-                    <form method="post" action="#">
+                    <div class="collapse in">
+                    <form method="post" id="contactForm" >
                         <div class="row">
                             <div class="6u 12u(mobilep)">
                                 <input class="wow fadeInRight"data-wow-delay="0.2s" type="text" name="name" placeholder="<%= __('contact_name') %>" />
@@ -119,6 +119,16 @@
                                 <textarea class="wow fadeInRight"data-wow-delay="0.6s" name="message" placeholder="<%= __('contact_message') %>" rows="6"></textarea>
                             </div>
                         </div>
+                        <div class="row errorMessageRequired">
+                                    <div class="12u text-center">
+                                        <small class=" label label-danger"><%= __('contact_all_required') %></small>
+                                    </div>
+                        </div>
+                        <div class="row errorMessageError">
+                            <div class="12u text-center">
+                                <small class=" label label-danger"><%= __('contact_error_message') %></small>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="12u">
                                 <ul class="actions">
@@ -126,7 +136,9 @@
                                 </ul>
                             </div>
                         </div>
+                        <div class="cache"><i class="fa fa-check"></i></div>
                     </form>
+                    </div>
 
                     <ul class="icons">
                         <li><a href="#" class="icon fa-twitter "><span class="label">Twitter</span></a></li>
