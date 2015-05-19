@@ -7,7 +7,7 @@ module.exports = function(grunt) {
                     src : ['.tmp/styles/**/*.css','.rebooted','views/**/*.ejs']
                 }, 
                 options: {
-                    proxy: "localhost:1338",
+                    proxy: "localhost:1339",
                     // socket: {
                     //     path: '/socket.io',
                     //     namespace: function (namespace) {
