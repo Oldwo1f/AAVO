@@ -38,6 +38,7 @@ var jsFilesToInject = [
   'bower_components/wow/dist/wow.min.js',
   'bower_components/waitingForImages/dist/jquery.waitingforimages.min.js',
   'bower_components/sharrre/jquery.sharrre.min.js',
+  'bower_components/fitvids/jquery.fitvids.js',
   'js/dependencies/**/*.js',
   'js/menu.js',
   

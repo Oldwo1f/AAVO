@@ -33,16 +33,28 @@
                         	<div class="mdcontent">
                                 <%- marked(article.content) %>
                         	</div>
-                                <div class="author text-right">
-                                	<% if(typeof article.author !=='undefined' && article.author.usename){ %>
-	                                <%= article.author.name %>
-	                                <%}else if(typeof article.author !=='undefined' && article.author.pseudo){%>
-	                                <%= article.author.pseudo %>
-	                                <%}%>
-                                </div>
-                                <div class="date text-right">
-                                	<%= moment(new Date(article.createdAt)).fromNow() %>
-                                </div>
+                            <div class="author text-right">
+                            	<% if(typeof article.author !=='undefined' && article.author.usename){ %>
+                                <%= article.author.name %>
+                                <%}else if(typeof article.author !=='undefined' && article.author.pseudo){%>
+                                <%= article.author.pseudo %>
+                                <%}%>
+                            </div>
+                            <div class="date text-right">
+                            	<%= moment(new Date(article.createdAt)).fromNow() %>
+                            </div>
+                            <% if(article.documents.length > 0) {%> 
+	                        <div  class="col col-xs-12 ">
+	                            <div class="pj">
+	                            	<label><%=  __('Pièces jointes') %></label>
+	                               	<ul>
+	                               		<% for(var i=0; i<article.documents.length; i++) {%>
+					                    <li><a href="/file/document/<%= article.documents[i].document.filename %>" target="_BLANK"><%= article.documents[i].document.filename %></a></li>
+					                    <% } %>  
+	                               	</ul>
+	                        	</div>
+	                        </div>
+	                        <% } %>
                         </div>
                         
                     </div> 

@@ -317,36 +317,40 @@ module.exports={
 	},
 	addCommentProj:function(req,res,next) {
 
-		console.log('addCommentProj');
-		console.log(req.params.itemid);
-		
-
-		Project.findOne(req.params.itemid).exec(function (err,article) {
-			console.log(article);
-			Comment.create({author:req.body.name,
-	  		email:req.body.email,
-	  		content:req.body.message,
-	  		status:'new',
-	  		project:req.params.itemid
+		Project.findOne(req.params.itemid).exec(function (err,project) {
+			Comment.create({
+				author:req.body.name,
+		  		email:req.body.email,
+		  		content:req.body.message,
+		  		status:'new',
+		  		project:req.params.itemid
 	  		}).exec(function (err,coment){
 									console.log(err)
 				if(err)
 					res.status(400).send(err)
 				else{
 
-				Notification.create({type:'projectcomment',status:'todo',info1:article.title,info2:'par '+coment.author,item:'project',itemid:req.params.itemid}).exec(function (err,notif){
+				Notification.create({type:'projectcomment',status:'todo',info1:project.title,info2:'par '+coment.author,item:'project',itemid:req.params.itemid}).exec(function (err,notif){
 						console.log(err)
 						console.log(notif)
 						 Notification.publishCreate(notif);
-			    		// res.status(200).send(created);
 			    	res.status(200).send(coment)
 				});
 				}
 			});
 		})
-		
-		
+	},
+	test:function(req,res,next) {
 
+		
+			    	res.status(200).view('test',{title: req.__('SEO_PORTFO_title'),
+				keyword: req.__('SEO_PORTFO_keyword'),
+				description:req.__('SEO_PORTFO_description'),
+				scripturl:'portfo.js',
+				menu:'portfo',
+				marked:marked
+			})
+		
 	},
 	addReponseProj:function(req,res,next) {
 

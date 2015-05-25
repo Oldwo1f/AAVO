@@ -22,10 +22,22 @@
                     <div class="box container">
                         
                         <div  class="col col-xs-12 ">
-                                <div class="mdcontent">
+                            <div class="mdcontent">
                                 <%- marked(project.content) %>
                         	</div>
                         </div>
+                        <% if(project.documents.length > 0) {%> 
+                        <div  class="col col-xs-12 ">
+                            <div class="pj">
+                            	<label><%=  __('Pièces jointes') %></label>
+                               	<ul>
+                               		<% for(var i=0; i<project.documents.length; i++) {%>
+				                    <li><a href="/file/document/<%= project.documents[i].document.filename %>" target="_BLANK"><%= project.documents[i].document.filename %></a></li>
+				                    <% } %>  
+                               	</ul>
+                        	</div>
+                        </div>
+                        <% } %>
                         
                     </div> 
                     <% }%> 

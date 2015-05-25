@@ -7,7 +7,8 @@ $(document).ready(function () {
 		$().prettyEmbed();
     }
     
-
+$(".toto").fitVids();
+    
     $('#twitter').sharrre({
 	  share: {
 	    twitter: true
