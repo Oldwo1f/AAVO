@@ -9,9 +9,10 @@
 <!-- Meta Tags -->
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-<title>Brushed | Responsive One Page Template</title>   
+<title><%- __('SEO_TITLE') %></title>   
 
-<meta name="description" content="Insert Your Site Description" /> 
+<meta name="description" content="<%- __('SEO_DESCRIPTION') %>" /> 
+<meta name="keyword" content="<%- __('SEO_KEYWORD') %>" /> 
 
 <!-- Mobile Specifics -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,14 +26,14 @@
 <link href="_include/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Main Style -->
-<link href="_include/css/main.css" rel="stylesheet">
+<link href="styles/importer.css" rel="stylesheet">
 
 <!-- Supersized -->
 <link href="_include/css/supersized.css" rel="stylesheet">
 <link href="_include/css/supersized.shutter.css" rel="stylesheet">
 
 <!-- FancyBox -->
-<link href="_include/css/fancybox/jquery.fancybox.css" rel="stylesheet">
+<!-- <link href="_include/css/fancybox/jquery.fancybox.css" rel="stylesheet"> -->
 
 <!-- Font Icons -->
 <link href="_include/css/fonts.css" rel="stylesheet">
@@ -120,10 +121,10 @@
         
         <nav id="menu">
           <ul id="menu-nav">
-              <li class="current"><a href="#home-slider"><%- __('HOME') %></a></li>
-                <li><a href="#work"><%- __('My project') %></a></li>
-                <li><a href="#about"><%- __('news') %></a></li>
-                <li><a href="#contact"><%- __('Contact') %></a></li>
+              <li class="current"><a href="#home-slider"><%- __('menu_home') %></a></li>
+                <li><a href="#work"><%- __('menu_project') %></a></li>
+                <li><a href="#about"><%- __('menu_news') %></a></li>
+                <li><a href="#contact"><%- __('menu_contact') %></a></li>
         <!-- <li><a href="shortcodes.html" class="external">Shortcodes</a></li> -->
             </ul>
         </nav>
@@ -177,12 +178,13 @@
                             %>
                             <li class="item-thumbs span3 <% if(projects[i].category){ %><%= projects[i].category.id %><% } %>">
                               <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                                <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="<%= projects[i].title %>" content=" " href="<%= url %>">
+                                <a class="hover-wrap fancybox"  title="<%= projects[i].title %>" content=" " href="<%= url %>">
                                   <span class="overlay-img"></span>
                                     <span class="overlay-img-thumb font-icon-eye"></span>
                                 </a>
                                 <!-- Thumb Image and Description -->
-                                <img src="/file/image/adminThumbs/<%= projects[i].img.filename %>" alt="TOTOTOTO <%= projects[i].img.alt %>"/>
+                                <% if(projects[i].img){ %>
+                                <img src="/file/image/adminThumbs/<%= projects[i].img.filename %>" alt="TOTOTOTO <%= projects[i].img.alt %>"/><% } %>
                             </li>
                           <% } %>
                           
@@ -214,23 +216,23 @@
         <% for(var i=0; i<articles.length; i++) {%>
 
         <% 
-            var url2 = 'projet/'+articles[i].id + '/';
+            var url2 = 'article/'+articles[i].id + '/';
             if(articles[i].rewriteurl){ 
-              url2 = 'projet/'+articles[i].id + '/'+articles[i].rewriteurl; 
+              url2 = 'article/'+articles[i].id + '/'+articles[i].rewriteurl; 
             } 
             %>
         <div class="span4 profile">
-          <div class="image-wrap">
-                <div class="hover-wrap">
+          <div class="image-wrap ">
+                <a class="hover-wrap fancybox2"  title="<%= projects[i].title %>" content=" " href="<%= url2 %>">
                     <span class="overlay-img"></span>
                     <span class="overlay-text-thumb"><span class="font-icon-eye"></span> Voir l'article</span>
-                </div>
+                </a>
                  <% if(articles[i].img){ %>
-                    <img src="/file/image/originalsize/<%= articles[i].img.filename %>" alt="<%= articles[i].img.alt %>"/>
+                    <img src="/file/image/originalsize/<%= articles[i].img.filename %>" alt="<%= articles[i].img.alt %>" />
                   <% } %>
             </div>
             <h3 class="profile-name"><%= articles[i].title %></h3>
-            <p class="profile-description"><%- marked(articles[i].content) %><a href="<%= url2 %>" class=""><%= __('Lire_la_suite') %></a></p>
+            <p class="profile-description"><%- marked(articles[i].content) %><a class="fancybox2"  title="<%= projects[i].title %>" content=" " href="<%= url2 %>"><%= __('Lire_la_suite') %></a></p>
                 
 
               
@@ -272,7 +274,7 @@
     <div class="row">
       <div class="span9">
         
-          <form id="contact-form" class="contact-form" action="#">
+          <form id="contact-form" class="contact-form">
               <p class="contact-name">
                 <input id="contact_name" type="text" placeholder="<%= __('form-full_name') %>" value="" name="name" />
                 </p>
@@ -282,13 +284,27 @@
                 <p class="contact-message">
                   <textarea id="contact_message" placeholder="<%= __('form-message') %>" name="message" rows="15" cols="40"></textarea>
                 </p>
-                <p class="contact-submit">
-                  <a id="contact-submit" class="submit" href="#"><%= __('form-send-button') %></a>
-                </p>
                 
-                <div id="response">
-                
+                <div class="response">
+                        <div class="row errorMessageRequired">
+                            <div class="12u text-center">
+                                <small class=" label label-danger"><%= __('contact_all_required') %></small>
+                            </div>
+                        </div>
+                        <div class="row errorMessageError">
+                            <div class="12u text-center">
+                                <small class=" label label-danger"><%= __('contact_error_message') %></small>
+                            </div>
+                        </div>
+                        <div class="row SuccessMessage">
+                            <div class="12u text-center">
+                                <small class=" label label-success"><%= __('contact_success_message') %></small>
+                            </div>
+                        </div>
                 </div>
+                <p class="contact-submit">
+                  <input id="contact-submit" type="submit" class="submit" value="<%= __('form-send-button') %>"></input>
+                </p>
             </form>
          
         </div>
@@ -342,7 +358,7 @@
 
 <!-- Footer -->
 <footer>
-  <p class="credits">&copy; <%- __('Elisabeth HOURS') %>. | <a href="http://momcreation.fr" >website</a> by <a href="http://momcreation.fr" >Momcreation</a></p>
+  <p class="credits">&copy; <%- __('Elisabeth HOURS') %>. - <a href="http://momcreation.fr" > website</a> by <a href="http://momcreation.fr" >Momcreation</a></p>
 </footer>
 <!-- End Footer -->
 
@@ -356,6 +372,7 @@
 <!-- Js -->
 <script src="/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/bower_components/jquery.nicescroll/dist/jquery.nicescroll.min.js"></script>
 <script src="_include/js/supersized.3.2.7.min.js"></script> <!-- Slider -->
 <script src="_include/js/waypoints.js"></script> <!-- WayPoints -->
 <script src="_include/js/waypoints-sticky.js"></script> <!-- Waypoints for Header -->
