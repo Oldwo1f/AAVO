@@ -141,9 +141,6 @@ module.exports={
 			res.status(200).render('index',{
 				'projects':results.projs,
 				'categories':results.cats,
-				title: req.__('SEO_PORTFO_title'),
-				keyword: req.__('SEO_PORTFO_keyword'),
-				description:req.__('SEO_PORTFO_description'),
 				// scripturl:'portfo.js',
 				// menu:'portfo',
 				articles:results.articles,
@@ -282,7 +279,7 @@ module.exports={
 									pathtoshare = sails.config.URL_HOME +'article/'+ projecttogo.id +'/'+projecttogo.urlrewrite;
 									// console.log('fetch ONE Project', projecttogo);
 									// res.status(200).send(projecttogo)
-									res.status(200).view('project',{
+									res.status(200).render('project',{
 										'project':projecttogo,
 										moment: moment,
 										pathtoshare: pathtoshare,
@@ -613,7 +610,7 @@ module.exports={
 
 									// console.log('fetch ONE Project', projecttogo);
 									// res.status(200).send(projecttogo)
-									res.status(200).view('article',{
+									res.status(200).render('article',{
 										'article':projecttogo,
 										moment: moment,
 										pathtoshare:pathtoshare,

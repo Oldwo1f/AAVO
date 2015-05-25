@@ -85,8 +85,7 @@ BRUSHED.slider = function(){
 									
 		// Theme Options			   
 		progress_bar			:	0,			// Timer for each slide							
-		mouse_scrub				:	0
-		
+		mouse_scrub				:	0, 
 	});
 
 }
@@ -162,24 +161,41 @@ BRUSHED.fancyBox = function(){
 	if($('.fancybox').length > 0 || $('.fancybox-media').length > 0 || $('.fancybox-various').length > 0){
 		
 		$(".fancybox").fancybox({
-				type: 'iframe',
+				type: 'ajax',
 				padding : 0,
+
+				showCloseButton			: 	false, 
+				showNavArrows			: 	false,
 				beforeShow: function () {
 					this.title = $(this.element).attr('title');
-					this.title = '<h4>' + this.title + '</h4>';
+					this.title = '<h4 class="col col-xs-12 ">' + this.title + '</h4>';
 				},
 				helpers : {
 					title : { type: 'inside' },
 				}
 			});
-			
-		$('.fancybox-media').fancybox({
-			openEffect  : 'none',
-			closeEffect : 'none',
+		$(".fancybox2").fancybox({
+			type: 'ajax',
+			padding : 0,
+
+			showCloseButton			: 	false, 
+			showNavArrows			: 	false,
+			beforeShow: function () {
+				this.title = $(this.element).attr('title');
+				this.title = ' <h4> </h4>';
+			},
 			helpers : {
-				media : {}
+				title : { type: 'inside' },
 			}
 		});
+			
+		// $('.fancybox-media').fancybox({
+		// 	openEffect  : 'none',
+		// 	closeEffect : 'none',
+		// 	helpers : {
+		// 		media : {}
+		// 	}
+		// });
 	}
 }
 
@@ -189,28 +205,52 @@ BRUSHED.fancyBox = function(){
 ================================================== */
 
 BRUSHED.contactForm = function(){
-	$("#contact-submit").on('click',function() {
-		$contact_form = $('#contact-form');
+	$('#contact-form').submit(function (e) {
+	console.log('contactForm');
+		e.preventDefault()
+		console.log($(this));
+		$this = $(this)
+		var postData = $this.serialize();
+
 		
-		var fields = $contact_form.serialize();
+				$.ajax(
+			    {
+			        url : '/contactEmail',
+			        type: "POST",
+			        data : postData,
+			        success:function(data, textStatus, jqXHR) 
+			        {
+			        	$this.find('.errorMessageRequired').hide()
+			        	$this.find('.errorMessageError').hide()
+			        	console.log('DATA',data);
+			        	$('#contact_name').val('');
+			        	$('#contact_email').val('');
+			        	$('#contact_message').val('');
+						$('#contact-form textarea').val('');
+			            $this.find('.SuccessMessage').fadeIn()
+			            console.log($this.parent());
+			            // setTimeout(function (argument) {
+				            // $this.parent().collapse('hide');
+			            // },2000)
+			        },
+			        error: function(jqXHR, textStatus, errorThrown) 
+			        {
+			        	$this.find('.errorMessageRequired').hide()
+			        	$this.find('.errorMessageError').hide()
+			            //if fails    
+			            console.log('errorThrown');  
+			            console.log(errorThrown);  
+			            console.log(textStatus);  
+			            console.log(jqXHR.responseText);  
+			            if(jqXHR.responseText=="field error"){
+			            	$this.find('.errorMessageRequired').fadeIn()
+			            }else{
+			            	$this.find('.errorMessageError').fadeIn()
+			            }
+			        }
+			   	});
 		
-		$.ajax({
-			type: "POST",
-			url: "_include/php/contact.php",
-			data: fields,
-			dataType: 'json',
-			success: function(response) {
-				
-				if(response.status){
-					$('#contact-form input').val('');
-					$('#contact-form textarea').val('');
-				}
-				
-				$('#response').empty().html(response.html);
-			}
-		});
-		return false;
-	});
+	})
 }
 
 
@@ -403,18 +443,38 @@ BRUSHED.toolTip = function(){
 BRUSHED.slider();
 
 $(document).ready(function(){
+
+
+
+	$('html').niceScroll({
+	cursorcolor:'#EEC782',
+	cursorborderradius:'0px',
+	cursoropacitymin:0.5,
+	cursoropacitymax:1,
+	mousescrollstep: 80,
+	autohidemode:'scroll',
+	scrollspeed:30,
+	zindex:9999
+	});
+
+
+
+
+
+
+
 	Modernizr.load([
 	{
 		test: Modernizr.placeholder,
 		nope: '_include/js/placeholder.js', 
 		complete : function() {
 				if (!Modernizr.placeholder) {
-						Placeholders.init({
-						live: true,
-						hideOnFocus: false,
-						className: "yourClass",
-						textColor: "#999"
-						});    
+						// Placeholders.init({
+						// live: true,
+						// hideOnFocus: false,
+						// className: "yourClass",
+						// textColor: "#999"
+						// });    
 				}
 		}
 	}
@@ -452,3 +512,12 @@ $(window).resize(function(){
 });
 
 });
+
+
+function submitComment(e,type,itemid) {
+	console.log('submitComment');
+	console.log(e);
+	console.log(type);
+	console.log(itemid);
+	return false;
+};
