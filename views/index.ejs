@@ -25,6 +25,7 @@
 <!-- Bootstrap -->
 <link href="_include/css/bootstrap.min.css" rel="stylesheet">
 
+<link rel="stylesheet" href="/bower_components/animate.css/animate.min.css">
 <!-- Main Style -->
 <link href="styles/importer.css" rel="stylesheet">
 
@@ -37,7 +38,6 @@
 
 <!-- Font Icons -->
 <link href="_include/css/fonts.css" rel="stylesheet">
-
 <!-- Shortcodes -->
 <link href="_include/css/shortcodes.css" rel="stylesheet">
 
@@ -116,15 +116,15 @@
       <a id="mobile-nav" class="menu-nav" href="#menu-nav"></a>
         
         <div id="logo">
-          <a id="goUp" href="#home-slider" ><%- __('Elisabeth HOURS') %></a>
+          <a id="goUp"  href="#home-slider" ><%- __('Elisabeth HOURS') %></a>
         </div>
         
         <nav id="menu">
           <ul id="menu-nav">
               <li class="current"><a href="#home-slider"><%- __('menu_home') %></a></li>
-                <li><a href="#work"><%- __('menu_project') %></a></li>
-                <li><a href="#about"><%- __('menu_news') %></a></li>
-                <li><a href="#contact"><%- __('menu_contact') %></a></li>
+                <li ><a href="#work"><%- __('menu_project') %></a></li>
+                <li ><a href="#about"><%- __('menu_news') %></a></li>
+                <li ><a href="#contact"><%- __('menu_contact') %></a></li>
         <!-- <li><a href="shortcodes.html" class="external">Shortcodes</a></li> -->
             </ul>
         </nav>
@@ -140,8 +140,8 @@
         <div class="row">
             <div class="span12">
                 <div class="title-page">
-                    <h2 class="title"><%- __('title-project') %></h2>
-                    <h3 class="title-description"><%- __('subtitle-project') %></h3>
+                    <h2 class="title wow fadeInRight"><%- __('title-project') %></h2>
+                    <h3 class="title-description wow fadeInRight" data-wow-delay="0.5s"><%- __('subtitle-project') %></h3>
                 </div>
             </div>
         </div>
@@ -153,10 +153,10 @@
               <!-- Filter -->
                 <nav id="options" class="work-nav">
                     <ul id="filters" class="option-set" data-option-key="filter">
-                        <li class="type-work"><%- __('category-project') %></li>
-                        <li><a href="#filter" data-option-value="*" class="selected"><%- __('all projects') %></a></li>
+                        <li class="type-work  wow fadeInLeft"><%- __('category-project') %></li>
+                        <li class="wow fadeInUp" data-wow-delay="0.5s"><a href="#filter" data-option-value="*" class="selected"><%- __('all projects') %></a></li>
                         <% for(var i=0; i<categories.length; i++) {%>
-                        <li><a href="#filter" data-option-value=".<%= categories[i].id %>" class=""><%= categories[i].name %></a></li>
+                        <li class="wow fadeInUp" data-wow-delay="<%= (i+2)*0.5%>s"><a href="#filter" data-option-value=".<%= categories[i].id %>" class=""><%= categories[i].name %></a></li>
                         <% } %>
                     </ul>
                 </nav>
@@ -176,7 +176,7 @@
                               url = 'projet/'+projects[i].id + '/'+projects[i].rewriteurl; 
                             } 
                             %>
-                            <li class="item-thumbs span3 <% if(projects[i].category){ %><%= projects[i].category.id %><% } %>">
+                            <li data-wow-delay="<%= (i)*0.5%>s" class="item-thumbs span3 wow zoomInUp <% if(projects[i].category){ %><%= projects[i].category.id %><% } %>">
                               <!-- Fancybox - Gallery Enabled - Title - Full Image -->
                                 <a class="hover-wrap fancybox"  title="<%= projects[i].title %>" content=" " href="<%= url %>">
                                   <span class="overlay-img"></span>
@@ -206,8 +206,8 @@
     <div class="row">
         <div class="span12">
             <div class="title-page">
-                <h2 class="title"><%- __('title-news') %></h2>
-                <h3 class="title-description"><%- __('subtitle-news') %></h3>
+                <h2 class="title wow fadeInRight"><%- __('title-news') %></h2>
+                <h3 class="title-description wow fadeInRight" data-wow-delay="0.5s"><%- __('subtitle-news') %></h3>
             </div>
         </div>
     </div>
@@ -221,7 +221,7 @@
               url2 = 'article/'+articles[i].id + '/'+articles[i].rewriteurl; 
             } 
             %>
-        <div class="span4 profile">
+        <div class="span4 profile wow fadeInUp" data-wow-delay="<%= (i)*0.5%>s">
           <div class="image-wrap ">
                 <a class="hover-wrap fancybox2"  title="<%= projects[i].title %>" content=" " href="<%= url2 %>">
                     <span class="overlay-img"></span>
@@ -263,8 +263,8 @@
     <div class="row">
         <div class="span12">
             <div class="title-page">
-                <h2 class="title"><a href="<%= url2 %>" class=""><%= __('title-contact') %></a></h2>
-                <h3 class="title-description"><%= __('subtitle-contact') %></h3>
+                <h2 class="title wow fadeInRight"><%= __('title-contact') %></h2>
+                <h3 class="title-description wow fadeInRight" data-wow-delay="0.5s"><%= __('subtitle-contact') %></h3>
             </div>
         </div>
     </div>
@@ -274,7 +274,7 @@
     <div class="row">
       <div class="span9">
         
-          <form id="contact-form" class="contact-form">
+          <form id="contact-form" class="contact-form wow fadeInLeft" data-wow-delay="0.5s">
               <p class="contact-name">
                 <input id="contact_name" type="text" placeholder="<%= __('form-full_name') %>" value="" name="name" />
                 </p>
@@ -302,7 +302,7 @@
                             </div>
                         </div>
                 </div>
-                <p class="contact-submit">
+                <p class="contact-submit wow fadeInRight" data-wow-delay="1.5s" >
                   <input id="contact-submit" type="submit" class="submit" value="<%= __('form-send-button') %>"></input>
                 </p>
             </form>
@@ -310,7 +310,7 @@
         </div>
         
         <div class="span3">
-          <div class="contact-details">
+          <div class="contact-details wow fadeInRight" data-wow-delay="0.5s">
             <h3><%= __('contact-details-title') %></h3>
                 <ul>
                     <li><a href="#"><%= __('contact-details-email') %></a></li>
@@ -371,8 +371,10 @@
 
 <!-- Js -->
 <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="/bower_components/wow/dist/wow.min.js"></script>
 <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/bower_components/jquery.nicescroll/dist/jquery.nicescroll.min.js"></script>
+<script src="/js/dependencies/prettyembed.js"></script>
 <script src="_include/js/supersized.3.2.7.min.js"></script> <!-- Slider -->
 <script src="_include/js/waypoints.js"></script> <!-- WayPoints -->
 <script src="_include/js/waypoints-sticky.js"></script> <!-- Waypoints for Header -->
@@ -382,7 +384,7 @@
 <script src="_include/js/plugins.js"></script> <!-- Contains: jPreloader, jQuery Easing, jQuery ScrollTo, jQuery One Page Navi -->
 <!-- End Js -->
 <script type="text/javascript">
-
+new WOW().init();
 console.log('MYSCRIPT');
 var articles = <%- JSON.stringify(articles) %>;
         console.log(articles);
