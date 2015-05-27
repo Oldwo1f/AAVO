@@ -11,7 +11,7 @@
 
 
                  	 <% if(project.publishVideo==true && project.video){ %>
-                 	<div class="box boximages container">
+                 	<div class="box boximages container  wow zoomInUp">
                         <div  class="col col-xs-12 ">
                         	<div class="pretty-embed" data-pe-videoid="<%= project.video %>"></div>
                         </div>
@@ -19,7 +19,7 @@
                     <%}%>
                    
                     <% if(project.content) {%>        
-                    <div class="box container">
+                    <div class="box container  wow zoomInUp">
                         
                         <div  class="col col-xs-12 ">
                             <div class="mdcontent">
@@ -48,7 +48,7 @@
                     <% for(var i=0; i<project.images.length; i++) {%>
                    
                             
-                    <div class="box boximages container ">
+                    <div class="box boximages container  wow zoomInUp">
                        
                         <div  class="col col-xs-12 ">
                             <img class="wow fadeIn" src="/file/image/originalsize/<%= project.images[i].image.filename %>" alt="<%= project.images[i].image.alt %>"/>
@@ -63,7 +63,7 @@
 	                    </div>       
                     </div>      
                     <% if(project.activeComent == true) {%>
-	                    <div class="box comments container">
+	                    <div class="box comments container  wow zoomInUp">
 	                        <header>
 	                            <h2><%= __('Comments') %></h2>
 	                        </header>

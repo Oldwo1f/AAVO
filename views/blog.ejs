@@ -21,7 +21,7 @@
                  <% for(var i=0; i<articles.length; i++) {%>
                    
                             
-                    <div class="box container collapse in" rel="<% if(articles[i].category){ %><%= articles[i].category.id %><% } %>">
+                    <div class="box container collapse in  wow zoomInUp" rel="<% if(articles[i].category){ %><%= articles[i].category.id %><% } %>">
                         <header>
                             <h2><%= articles[i].title %></h2>
                         </header>
@@ -29,7 +29,7 @@
  
 
                                 <% if(articles[i].publishVideo==true && articles[i].video){ %>
-                                
+
                                          <!--  <div class="container2">
                                             <div class="vendor">
                                                 <iframe src="https://player.vimeo.com/video/127909728?badge=0" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
