@@ -7,11 +7,12 @@ module.exports={
 	serveDocument:function  (req,res,next) {
 
 
-		console.log('SERVE IMG');
+		console.log('SERVE DOCUMENT');
 		var filePath = sails.config.PATH_TO_ADMIN+'uploads/files/'+req.params.name;
 		// sails.log(filePath);
-		console.log(filePath);
+		console.log('filePath',filePath);
 	    var stat = fs.statSync(filePath);
+	    console.log('stat',stat);
 	    // setTimeout(function (argument) {
 	    	res.writeHead(200, {
 		        // 'Content-Type': 'image/',
@@ -25,3 +26,4 @@ module.exports={
 	}
 
 }
+
